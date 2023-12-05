@@ -4,6 +4,7 @@
       <div class="q-mb-xl">
         <q-input v-model="tempData.name" label="姓名" />
         <q-input v-model="tempData.age" label="年齡" />
+        <q-btn color="primary" class="q-mt-md">新增</q-btn>
       </div>
 
       <q-table
@@ -11,7 +12,7 @@
         bordered
         ref="tableRef"
         :rows="blockData"
-        :columns="tableConfig"
+        :columns="(tableConfig as QTableProps['columns'])"
         row-key="id"
         hide-pagination
         separator="cell"
@@ -76,6 +77,7 @@
 </template>
 
 <script setup lang="ts">
+import { QTableProps } from 'quasar';
 import { ref } from 'vue';
 interface btnType {
   label: string;
