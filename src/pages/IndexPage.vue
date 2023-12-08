@@ -78,6 +78,7 @@
 </template>
 
 <script setup lang="ts">
+import axios from 'axios';
 import { QTableProps } from 'quasar';
 import { ref } from 'vue';
 interface btnType {
