@@ -4,7 +4,7 @@
       <div class="q-mb-xl">
         <q-input v-model="tempData.name" label="姓名" />
         <q-input v-model="tempData.age" label="年齡" />
-        <q-btn color="primary" class="q-mt-md" @click="addData">新增</q-btn>
+        <q-btn color="primary" class="q-mt-md">新增</q-btn>
       </div>
 
       <q-table
@@ -79,19 +79,18 @@
 
 <script setup lang="ts">
 import { QTableProps } from 'quasar';
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
-
+import { ref } from 'vue';
 interface btnType {
   label: string;
   icon: string;
   status: string;
 }
-
-//api
-const apiUrl = 'https://demo.mercuryfire.com.tw:49110/crudTest';
-
-const blockData = ref([]);
+const blockData = ref([
+  {
+    name: 'test',
+    age: 25,
+  },
+]);
 const tableConfig = ref([
   {
     label: '姓名',
@@ -124,63 +123,8 @@ const tempData = ref({
   age: '',
 });
 function handleClickOption(btn, data) {
-  switch (btn) {
-    case 'edit':
-      updateData(data);
-      break;
-    case 'delete':
-      deleteData(data.id);
-      break;
-  }
+  // ...
 }
-
-// GET
-async function fetchData() {
-  try {
-    const res = await axios.get(`${apiUrl}/a`);
-    blockData.value = res.data.result;
-  } catch (e) {
-    console.log(e);
-  }
-}
-
-//ADD
-async function addData() {
-  try {
-    const res = await axios.post(apiUrl, {
-      name: tempData.value.name,
-      age: Number(tempData.value.age),
-    });
-    console.log('res', res);
-    fetchData();
-  } catch (e) {
-    console.log(e);
-  }
-}
-
-//UPDATE
-async function updateData(data) {
-  try {
-    const res = await axios.patch(apiUrl, data);
-    fetchData();
-  } catch (e) {
-    console.log(e);
-  }
-}
-
-//DELETE
-async function deleteData(id) {
-  try {
-    const res = await axios.delete(`${apiUrl}/${id}`);
-    fetchData();
-  } catch (e) {
-    console.log(e);
-  }
-}
-
-onMounted(() => {
-  fetchData();
-});
 </script>
 
 <style lang="scss" scoped>
