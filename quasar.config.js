@@ -63,8 +63,6 @@ module.exports = configure(function (/* ctx */) {
       // publicPath: '/',
       // analyze: true,
       env: {
-        // API: ctx.dev ? "https://localhost:5001" : "http://172.17.0.7/",
-        // Local: ctx.dev ? "https://localhost:5000" : "https://dahua.metcfire.com.tw/",
         API: 'https://demo.mercuryfire.com.tw:49110/',
       },
       // rawDefine: {}
